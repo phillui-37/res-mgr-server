@@ -1,0 +1,32 @@
+logs
+target
+/.bsp
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+/.vscode
+/.metals
+.bloop
+out/
+project/target/
+project/project/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# IDE-specific files
+*.iml
+*.iws
+*.ipr
