@@ -1,28 +1,29 @@
-import play.sbt.PlayScala
-
 name := "res-mgr-server"
 organization := "xyz.kgy.production"
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file("."))
-  .enablePlugins(PlayScala)
-
 scalaVersion := "3.7.1"
 
-val PekkoVersion = "1.1.5"
+val ZioVersion = "2.1.20"
+val ZioHttpVersion = "3.3.3"
+val ZioJsonVersion = "0.7.44"
+val ZioLoggingVersion = "2.5.1"
+val LogbackVersion = "1.5.18"
 val CatsVersion = "2.13.0"
 
 libraryDependencies ++= Seq(
-  guice,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "7.0.2" % Test,
+  "dev.zio" %% "zio" % ZioVersion,
+  "dev.zio" %% "zio-http" % ZioHttpVersion,
+  "dev.zio" %% "zio-json" % ZioJsonVersion,
+  "dev.zio" %% "zio-logging" % ZioLoggingVersion,
+  "dev.zio" %% "zio-logging-slf4j2" % ZioLoggingVersion,
+  "ch.qos.logback" % "logback-classic" % LogbackVersion,
   "com.typesafe.slick" %% "slick" % "3.6.1",
   "org.postgresql" % "postgresql" % "42.7.7",
   "org.typelevel" %% "cats-core" % CatsVersion,
   "org.typelevel" %% "cats-kernel" % CatsVersion,
+  "dev.zio" %% "zio-test" % ZioVersion % Test,
+  "dev.zio" %% "zio-test-sbt" % ZioVersion % Test,
 )
 
-// Adds additional packages into Twirl
-// TwirlKeys.templateImports += "xyz.kgy.production.controllers._"
-
-// Adds additional packages into conf/routes
-// RoutesKeys.routesImport += "xyz.kgy.production.binders._"
+testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
