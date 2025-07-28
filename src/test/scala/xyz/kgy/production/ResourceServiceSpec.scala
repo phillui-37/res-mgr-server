@@ -1,7 +1,9 @@
 package xyz.kgy.production
 
-import zio._
-import zio.test._
+import zio.*
+import zio.test.*
+import xyz.kgy.production.service.{ResourceService, ResourceServiceImpl}
+import xyz.kgy.production.domain.{CreateResourceRequest, UpdateResourceRequest}
 
 object ResourceServiceSpec extends ZIOSpecDefault {
   

@@ -30,3 +30,5 @@ Desktop.ini
 *.iml
 *.iws
 *.ipr
+
+metals.sbt
