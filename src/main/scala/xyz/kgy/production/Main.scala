@@ -2,7 +2,7 @@ package xyz.kgy.production
 
 import xyz.kgy.production.controller.ResourceController
 import xyz.kgy.production.service.ResourceService
-import xyz.kgy.production.db.{DatabaseProvider, DatabaseMigration}
+import xyz.kgy.production.db.{DatabaseMigration, DatabaseProvider, FlywayMigration}
 import xyz.kgy.production.config.AppConfig
 import zio.*
 import zio.http.*
@@ -32,12 +32,11 @@ object Main extends ZIOAppDefault {
   /**
    * Initialize database by running migrations
    */
-  private val initializeDatabase: ZIO[DatabaseProvider & DatabaseMigration, Throwable, Unit] =
+  private val initializeDatabase: ZIO[DatabaseProvider & FlywayMigration, Throwable, Unit] =
     for {
-      _ <- ZIO.logInfo("Initializing database...")
-      migration <- ZIO.service[DatabaseMigration]
-      _ <- migration.migrate
-      _ <- ZIO.logInfo("Database initialization completed!")
+      _ <- ZIO.logInfo("Running database migrations...")
+      _ <- FlywayMigration.migrate
+      _ <- ZIO.logInfo("Database migrations completed!")
     } yield ()
 
   override def run: ZIO[Any, Any, Any] = {

@@ -17,6 +17,7 @@ val LogbackVersion = "1.5.18"
 val CatsVersion = "2.13.0"
 val SlickVersion = "3.6.1"
 val HikariCPVersion = "6.0.0"
+val FlywayVersion = "10.10.0"
 
 libraryDependencies ++= Seq(
   "dev.zio" %% "zio" % ZioVersion,
@@ -33,6 +34,8 @@ libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-kernel" % CatsVersion,
   "dev.zio" %% "zio-test" % ZioVersion % Test,
   "dev.zio" %% "zio-test-sbt" % ZioVersion % Test,
+  "org.flywaydb" % "flyway-core" % FlywayVersion,
+  "org.flywaydb" % "flyway-database-postgresql" % FlywayVersion,
 )
 
 testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")

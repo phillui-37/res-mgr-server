@@ -19,6 +19,13 @@ object AppLayers {
     DatabaseConfig.live >+> (ResourceRepository.live ++ DatabaseMigration.live)
 
   /**
+   * Flyway migration layer
+   * Provides: FlywayMigration
+   */
+  val flywayLayer: ZLayer[AppConfig, Nothing, FlywayMigration] =
+    FlywayMigration.live
+
+  /**
    * Service layer that depends on database layer
    * Provides: ResourceService
    */
@@ -30,6 +37,6 @@ object AppLayers {
    * Provides all services needed by the application
    * Requires AppConfig as input
    */
-  val appLayer: ZLayer[AppConfig, Throwable, DatabaseProvider & ResourceRepository & DatabaseMigration & ResourceService] =
-    databaseLayer >+> serviceLayer
+  val appLayer: ZLayer[AppConfig, Throwable, DatabaseProvider & ResourceRepository & DatabaseMigration & ResourceService & FlywayMigration] =
+    databaseLayer >+> serviceLayer ++ flywayLayer
 }
