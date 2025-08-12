@@ -99,13 +99,7 @@ The application can be configured using either:
 
 ## Database Migrations
 
-Database schema is managed using Flyway migrations:
-
-```bash
-# Migrations are automatically applied on startup
-# To manually view migration status:
-sbt "runMain xyz.kgy.production.db.FlywayMigrationCLI info"
-```
+Database schema is managed using Flyway migrations. Migrations are automatically applied on startup.
 
 To add new migrations, create versioned SQL files in `src/main/resources/db/migration/`:
 - `V2__Add_new_feature.sql`

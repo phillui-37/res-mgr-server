@@ -1,8 +1,7 @@
 package xyz.kgy.production
 
 import xyz.kgy.production.controller.ResourceController
-import xyz.kgy.production.service.ResourceService
-import xyz.kgy.production.db.{DatabaseMigration, DatabaseProvider, FlywayMigration}
+import xyz.kgy.production.db.{DatabaseProvider, FlywayMigration}
 import xyz.kgy.production.config.AppConfig
 import zio.*
 import zio.http.*
@@ -42,6 +41,9 @@ object Main extends ZIOAppDefault {
   override def run: ZIO[Any, Any, Any] = {
     for {
       config <- ZIO.service[AppConfig]
+      _ <- ZIO.when(config.env == "DEBUG")(
+        ZIO.logDebug(s"config: $config")
+      )
       port = config.port
       _ <- ZIO.logInfo(s"Starting Resource Manager Server on port $port")
       _ <- initializeDatabase
