@@ -15,6 +15,7 @@ trait AppConfig {
   def dbName: String
   def dbUser: String
   def dbPassword: String
+  def env: String
 }
 
 object AppConfig {
@@ -22,12 +23,19 @@ object AppConfig {
    * Implementation of AppConfig that prioritizes environment variables over config file
    */
   private class AppConfigImpl(config: com.typesafe.config.Config) extends AppConfig {
-    // Helper method to get value from environment or fall back to config
+    // Helper method to get value with priority: sys env -> application.conf -> default
     private def getFromEnvOrConfig[T](envName: String, configPath: String, convert: String => T, default: => T): T = {
+      // First try environment variable
       sys.env.get(envName)
         .flatMap(envValue => Try(convert(envValue)).toOption)
         .getOrElse {
-          Try(default).getOrElse(default)
+          // Then try application.conf
+          Try(config.getString(configPath))
+            .map(convert)
+            .getOrElse {
+              // Finally fall back to default
+              default
+            }
         }
     }
 
@@ -71,6 +79,13 @@ object AppConfig {
       "database.properties.password",
       identity,
       config.getString("database.properties.password")
+    )
+    
+    override val env: String = getFromEnvOrConfig(
+      "DEBUG",
+      "app.env",
+      identity,
+      config.getString("app.env")
     )
   }
 
