@@ -1,9 +1,9 @@
 (ns res-mgr-server.core
-  (:require [ring.adapter.jetty :refer [run-jetty]]
-            [ring.middleware.params]
-            [clojure.tools.logging :as logging]
+  (:require [clojure.tools.logging :as logging]
+            [res-mgr-server.route.root :refer [app]]
+            [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.json :refer [wrap-json-response]]
-            [res-mgr-server.route.root :refer [app]])
+            [ring.middleware.params])
   (:gen-class))
 
 (def port 3000)

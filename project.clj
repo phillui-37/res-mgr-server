@@ -13,6 +13,7 @@
                  [compojure "1.7.2"]
                 ;;  db
                  [com.github.seancorfield/next.jdbc "1.3.1070"]
+                 [com.zaxxer/HikariCP "7.0.2"]
                  [migratus "1.6.4"]
                  [org.xerial/sqlite-jdbc "3.51.0.0"]
                  [org.postgresql/postgresql "42.7.8"]]
