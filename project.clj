@@ -15,9 +15,13 @@
                  [com.github.seancorfield/next.jdbc "1.3.1070"]
                  [com.zaxxer/HikariCP "7.0.2"]
                  [migratus "1.6.4"]
-                 [org.xerial/sqlite-jdbc "3.51.0.0"]
-                 [org.postgresql/postgresql "42.7.8"]]
+                 [org.xerial/sqlite-jdbc "3.51.1.0"]
+                 [migratus "1.6.4"]
+                 [migratus-lein "0.7.3"]]
   :main ^:skip-aot res-mgr-server.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true", "-Dclojure.tools.logging.factory=clojure.tools.logging.impl/log4j2-factory"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true", "-Dclojure.tools.logging.factory=clojure.tools.logging.impl/log4j2-factory"]}}
+  :migratus {:store :database
+             :db {:dbtype "sqlite"
+                  :dbname "res_mgr_db.sqlite"}})

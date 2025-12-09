@@ -3,12 +3,11 @@
             [res-mgr-server.route.root :refer [app]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.middleware.json :refer [wrap-json-response]]
-            [ring.middleware.params])
+            [ring.middleware.params]
+            [res-mgr-server.service.env :refer [env]])
   (:gen-class))
 
-(def port 3000)
-
-
+(def port (-> env :server :port))
 
 (def middleware-wrapped-app
   (-> app

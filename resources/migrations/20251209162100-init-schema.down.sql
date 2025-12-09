@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS item_prop_value;
+--;;
+DROP TABLE IF EXISTS category_prop_map;
+--;;
+DROP TABLE IF EXISTS item_location_map;
+--;;
+DROP TABLE IF EXISTS item_tag_map;
+--;;
+DROP TABLE IF EXISTS prop;
+--;;
+DROP TABLE IF EXISTS item;
+--;;
+DROP TABLE IF EXISTS category;
+--;;
+DROP TABLE IF EXISTS tag;
+--;;
+DROP TABLE IF EXISTS location;
